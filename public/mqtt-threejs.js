@@ -75,7 +75,7 @@ let joints = [];
 const load_geometries = async() => {
     {
         let geometry = await load_stl('./FANUC_R2000iA165F-STL/BASE.stl');
-        joints.push(new THREE.Mesh(geometry, dark));
+        joints.push(new THREE.Mesh(geometry, yellow));
         joints[0].geometry.scale(0.001, 0.001, 0.001);
         scene.add(joints[0]);
     }
@@ -83,7 +83,7 @@ const load_geometries = async() => {
         let geometry = await load_stl('./FANUC_R2000iA165F-STL/J1-1.stl');
         let geometry2 = await load_stl('./FANUC_R2000iA165F-STL/J1-2.stl');
         geometry.merge(geometry2);
-        joints.push(new THREE.Mesh(geometry, dark));
+        joints.push(new THREE.Mesh(geometry, yellow));
         joints[1].geometry.scale(0.001, 0.001, 0.001);
         scene.add(joints[1]);
     }
