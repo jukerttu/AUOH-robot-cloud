@@ -1,0 +1,2 @@
+Localhost testaus tapahtuu tämän sivun kautta.
+localhost:8080/joint-values.html
