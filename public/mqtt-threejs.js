@@ -32,7 +32,6 @@ three_view.appendChild(renderer.domElement);
     //scene.add(mesh);
 }
 
-
 // Laitetaan valot päälle 
 let light = new THREE.DirectionalLight(0xAAAAAA, 1.5);
 light.position.x = 10;
@@ -70,6 +69,7 @@ let yellow = new THREE.MeshLambertMaterial({
     color: 0xFFFF00
 });
 
+// Luodaan robotin runko joka voi liikkua liikeen avulla.
 let joints = [];
 
 const load_geometries = async() => {
@@ -117,7 +117,6 @@ load_geometries();
 const orbit_controls = new THREE.OrbitControls(camera, renderer.domElement);
 orbit_controls.target = new THREE.Vector3(0,0,0);
 
-
 const animate = ()=>{
     requestAnimationFrame(animate);
     orbit_controls.update();
@@ -133,5 +132,3 @@ const resize = ()=>{
     renderer.setSize(width, height);
 }
 window.onresize = resize;
-
-//Camera setup:
