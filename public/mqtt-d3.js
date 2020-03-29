@@ -146,7 +146,7 @@ const update_chart = () => {
 
 const mqtt_client = mqtt.connect('wss://mqtt-broker1.herokuapp.com');
 mqtt_client.on('connect', () => {
-    console.log('connected to mqtt broker');
+    //console.log('connected to mqtt broker');
     mqtt_client.subscribe('joints')
 });
 

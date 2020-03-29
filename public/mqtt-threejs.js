@@ -15,7 +15,7 @@ let camera = new THREE.PerspectiveCamera(view_angle, width/height, near, far);
 camera.position.x = 5;
 camera.position.y = 5;
 camera.position.z = 5;
-camera.up = new THREE.Vector3(0, 0, 1);
+camera.up = new THREE.Vector3(0, 0, 2);
 camera.lookAt(scene.position);
 
 renderer.setSize(width, height);
@@ -125,6 +125,8 @@ load_geometries().then(()=>{
   
     //Liitetään palat yhteeen
     scene.add(joints[0]);
+    
+    // Käännetään jalusta oikein päin
     joints[0].rotation.set(THREE.Math.degToRad(90), 0, 0);
     
     offsets.push(new THREE.Group());
@@ -152,14 +154,14 @@ load_geometries().then(()=>{
     joints[4].add(offsets[4]);
     offsets[4].add(joints[5]);
 
-     //joints[1].add(joints[2]);
-    //joints[1].rotation.set(0, THREE.Math.degToRad(45), 0);
-    //J1: [0, 282,0] Y
-    //J2: [312, 670, -117] Z
-    //J3: [268.69, 1744.13, -196.85] Z
-    //J4: [1315.19, 1969.13, 0.15] X
-    //J5: [1548.69, 1969.13, 87.15] Z
-    //J6: [1763.69, 1969.13, 20.47] X
+    // joints[1].add(joints[2]);
+    //joints[4].rotation.set(-THREE.Math.degToRad(45),  0, 0);
+    // J1: [0, 282,0] Y
+    // J2: [312, 670, -117] Z
+    // J3: [268.69, 1744.13, -196.85] Z
+    // J4: [1315.19, 1969.13, 0.15] X
+    // J5: [1548.69, 1969.13, 87.15] Z
+    // J6: [1763.69, 1969.13, 20.47] X
     // Kotitehtävänä on rakentaa loppuun nuo robotin arvot.
 });
 
@@ -191,11 +193,11 @@ mqtt_client.on('connect', ()=> {
 mqtt_client.on('message', (topic, message)=> {
     if(joints.length == 6){
         const joint_data = JSON.parse(message);
-        joints[1].rotation.set(0, THREE.Math.degToRad(joint_data.joints[0]), 0);
-        joints[2].rotation.set(0, 0, THREE.Math.degToRad(joint_data.joints[1]));
-        joints[3].rotation.set(0, 0, THREE.Math.degToRad(joint_data.joints[2]) - THREE.Math.degToRad(joint_data.joints[1]));
-        joints[4].rotation.set(0, 0, THREE.Math.degToRad(joint_data.joints[3]));
-        joints[5].rotation.set(0, 0, THREE.Math.degToRad(joint_data.joints[4]));
+        joints[1].rotation.set(0, THREE.Math.degToRad(joint_data.joints[1]), 0);
+        joints[2].rotation.set(0, 0, THREE.Math.degToRad(joint_data.joints[2]));
+        joints[3].rotation.set(0, 0, THREE.Math.degToRad(joint_data.joints[3]) - THREE.Math.degToRad(joint_data.joints[2]));
+        joints[4].rotation.set(THREE.Math.degToRad(joint_data.joints[4]), 0, 0);
+        joints[5].rotation.set(0, 0, THREE.Math.degToRad(joint_data.joints[5]));
     }
     //console.log(message);
 });
